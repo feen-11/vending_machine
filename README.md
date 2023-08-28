@@ -1,0 +1,1 @@
+init vending_machine
