@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# Drinkクラスはドリンクに関する機能を提供します。
 class Drink
+  attr_reader :name, :price, :stock
 
   def initialize(name, price)
     @name = name
@@ -8,26 +10,13 @@ class Drink
     @stock = 5
   end
 
-  def name
-    @name
-  end
-
-  def price
-    @price
-  end
-
-  def stock
-    @stock
-  end
-  
   def reduce_stock
-    set_stock(stock - 1) if stock > 0
+    change_stock(stock - 1) if stock.positive?
   end
 
   private
 
-  def set_stock(val)
+  def change_stock(val)
     @stock = val
   end
-
 end
