@@ -1,15 +1,33 @@
+# frozen_string_literal: true
+
 class Drink
 
-  attr_accessor :name, :price, :stock
-
-  def initialize(name='ペプシ', price=150, stock=5)
+  def initialize(name, price)
     @name = name
     @price = price
-    @stock = stock
+    @stock = 5
   end
 
-  def show_stock
-    self.stock
+  def name
+    @name
+  end
+
+  def price
+    @price
+  end
+
+  def stock
+    @stock
+  end
+  
+  def reduce_stock
+    set_stock(stock - 1) if stock > 0
+  end
+
+  private
+
+  def set_stock(val)
+    @stock = val
   end
 
 end
