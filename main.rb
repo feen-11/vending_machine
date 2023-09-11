@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './class/Purchase'
 
 def print_menu
@@ -16,6 +18,12 @@ end
 
 def purchase_drink(suica, purchase)
   puts "現在のSuicaの残高は#{suica.balance}円です。"
+  begin
+    available_drinks_list = purchase.available_drinks
+  rescue StandardError => e
+    puts "エラー: #{e.message}"
+    return
+  end
   puts '購入可能なドリンク一覧:'
   purchase.available_drinks.each_with_index do |drink, index|
     puts "#{index + 1}. #{drink.name} (#{drink.price}円)"
@@ -36,8 +44,14 @@ def purchase_drink(suica, purchase)
 end
 
 def show_stock(purchase)
+  begin
+    available_drinks_list = purchase.available_drinks
+  rescue StandardError => e
+    puts "エラー: #{e.message}"
+    return
+  end
   puts '在庫確認:'
-  purchase.available_drinks.each do |drink|
+  available_drinks_list.each do |drink|
     puts "#{drink.name}: #{drink.stock}本"
   end
 end

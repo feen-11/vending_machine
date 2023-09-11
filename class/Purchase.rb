@@ -13,7 +13,9 @@ class Purchase
   end
 
   def available_drinks
-    @drinks.select { |drink| drink.stock.positive? }
+    available_drinks_list = @drinks.select { |drink| drink.stock.positive? }
+    raise '在庫がありません。' if available_drinks_list.empty?
+    available_drinks_list
   end
 
   def judge_purchase(suica, drink)
